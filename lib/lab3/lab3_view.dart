@@ -23,72 +23,47 @@ class Lab3View extends StatelessWidget {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Builder(builder: (_) {
-                    return SizedBox(
-                      width: 100,
-                      child: TextField(
-                        onChanged: controller.updateY,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                      ),
-                    );
-                  }),
-                  SizedBox(
-                    width: 30,
+                  Text(
+                    'Події',
+                    style: TextStyle(fontSize: 30),
                   ),
-                  Builder(builder: (_) {
-                    return SizedBox(
-                      width: 100,
-                      child: TextField(
-                        onChanged: controller.updateX,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                      ),
-                    );
-                  }),
+                  Icon(Icons.arrow_right)
                 ],
               ),
-              DataTable(
-                columns: [
-                  DataColumn(
-                    label: Text(''),
-                  ),
-                  ...List.generate(
-                    controller.x,
-                    (index) => DataColumn(
-                      label: Text(''),
-                    ),
-                  ),
-                ],
-                rows: List.generate(
-                  controller.y,
-                  (y) => DataRow(cells: [
-                    DataCell(Text('Альтернатива ${y + 1}')),
-                    ...List.generate(
-                      controller.x,
-                      (x) => DataCell(
-                        SizedBox(
-                          width: 100,
-                          height: 40,
-                          child: Builder(builder: (_) {
-                            return TextField(
-                              onChanged: (String value) {
-                                controller.updateValue(x, y, value);
-                              },
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                            );
-                          }),
-                        ),
+              Padding(
+                padding: const EdgeInsets.only(right: 220.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 200,
+                      child: Text(
+                        'Альтернативи',
+                        style: TextStyle(fontSize: 30),
                       ),
                     ),
-                  ]),
+                    Icon(Icons.arrow_downward),
+                    SizedBox(width: 20),
+                    Container(
+                      decoration: BoxDecoration(border: Border.all()),
+                      width: 300,
+                      child: TextField(
+                        minLines: 1,
+                        maxLines: 10,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9 \n]'))
+                        ],
+                        onChanged: controller.updateValue,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    ),
+                  ],
                 ),
+              ),
+              SizedBox(
+                height: 30,
               ),
               SizedBox(
                 width: 100,

@@ -1,40 +1,43 @@
-import 'dart:math';
-
 import 'package:dtm_front/app_front/app_front_connector.dart';
 import 'package:dtm_front/lab3/lab3_serializers.dart';
 import 'package:get/get.dart';
 
 class Lab3Controller extends GetxController {
-  int x, y;
-
-  List<List<int>> matrix;
+  String matrix;
 
   AnswerData answer;
 
-  void updateX(String newX) {
-    x = int.tryParse(newX) ?? x;
-    x = min(x, 15);
-    update();
-  }
-
-  void updateY(String newY) {
-    y = int.tryParse(newY) ?? y;
-    y = min(y, 15);
-    update();
-  }
-
-  void updateValue(int x, int y, String value) {
-    matrix[y][x] = int.parse(value) ?? matrix[x][y];
+  void updateValue(String value) {
+    matrix = value;
   }
 
   Future submit() async {
+    Get.focusScope.unfocus();
+    final localMatrix = matrix
+        .split('\n')
+        .map(
+          (line) => line
+              .split(' ')
+              .map(
+                (digit) => int.parse(digit),
+              )
+              .toList(),
+        )
+        .toList();
     data = TaskData(
-        List.generate(y, (index) => '${index + 1}'),
-        List.generate(x, (index) => '$index'),
-        matrix.take(y).map((e) => e.take(x).toList()).toList());
+      List.generate(localMatrix.length, (index) => '${index + 1}'),
+      List.generate(localMatrix[0].length, (index) => '$index'),
+      localMatrix,
+    );
     final connectInstance = AppFrontConnect();
     final response = await connectInstance.postLab3(data.toJson());
-    answer = AnswerData.fromJson(response.body);
+    assert(!response.hasError, 'Error in response. Is server active?');
+    try {
+      answer = AnswerData.fromJson(response.body);
+    } catch (e) {
+      answer = null;
+    }
+
     update();
   }
 
@@ -43,8 +46,5 @@ class Lab3Controller extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    x = 1;
-    y = 1;
-    matrix = List.generate(100, (_) => List.generate(100, (_) => 0));
   }
 }
