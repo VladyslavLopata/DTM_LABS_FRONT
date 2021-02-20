@@ -1,3 +1,4 @@
+import 'package:dtm_front/bindings/app_bindings.dart';
 import 'package:dtm_front/lab1/lab1_binding.dart';
 import 'package:dtm_front/lab2/lab2_view.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Лопата В',
       initialRoute: '/lab1',
+      initialBinding: AppBindings(),
       getPages: [
         GetPage(
           name: '/lab1',
