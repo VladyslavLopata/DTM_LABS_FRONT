@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 class Lab3Controller extends GetxController {
   String matrix;
 
+  TaskData data;
   AnswerData answer;
 
   void updateValue(String value) {
@@ -13,7 +14,6 @@ class Lab3Controller extends GetxController {
   }
 
   Future submit() async {
-    Get.focusScope.unfocus();
     final localMatrix = CommonUtils.matrixFromString(matrix);
     data = TaskData(
       List.generate(localMatrix.length, (index) => '${index + 1}'),
@@ -30,12 +30,5 @@ class Lab3Controller extends GetxController {
     }
 
     update();
-  }
-
-  TaskData data;
-
-  @override
-  void onInit() {
-    super.onInit();
   }
 }

@@ -1,50 +1,23 @@
-import 'dart:math';
-
+import 'package:dtm_front/services/common_utils.dart';
 import 'package:dtm_front/services/request_service.dart';
 import 'package:dtm_front/lab4/lab4_serializers.dart';
 import 'package:get/get.dart';
 
 class Lab4Controller extends GetxController {
-  int x, y;
+  String matrix;
 
-  List<List<int>> matrix;
-
+  TaskData data;
   AnswerData answer;
 
-  void updateX(String newX) {
-    x = int.tryParse(newX) ?? x;
-    x = min(x, 15);
-    update();
-  }
-
-  void updateY(String newY) {
-    y = int.tryParse(newY) ?? y;
-    y = min(y, 15);
-    update();
-  }
-
-  void updateValue(int x, int y, String value) {
-    matrix[y][x] = int.parse(value) ?? matrix[x][y];
+  void updateValue(String value) {
+    matrix = value;
   }
 
   Future submit() async {
-    data = TaskData(
-        // List.generate(y, (index) => '${index + 1}'),
-        // List.generate(x, (index) => '$index'),
-        matrix.take(y).map((e) => e.take(x).toList()).toList());
+    data = TaskData(CommonUtils.matrixFromString(matrix));
     final connectInstance = RequestService();
     final response = await connectInstance.postLab4(data.toJson());
     answer = AnswerData.fromJson(response.body);
     update();
-  }
-
-  TaskData data;
-
-  @override
-  void onInit() {
-    super.onInit();
-    x = 1;
-    y = 1;
-    matrix = List.generate(100, (_) => List.generate(100, (_) => 0));
   }
 }
