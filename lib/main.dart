@@ -1,5 +1,4 @@
 import 'package:dtm_front/bindings/app_bindings.dart';
-import 'package:dtm_front/lab1/lab1_binding.dart';
 import 'package:dtm_front/lab2/lab2_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,9 +22,6 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/lab1',
           page: () => Lab1View(),
-          bindings: [
-            AppFrontBinding(),
-          ],
         ),
         GetPage(
           name: '/lab2',
