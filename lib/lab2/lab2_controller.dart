@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:dtm_front/app_front/app_front_connector.dart';
-import 'package:dtm_front/lab2/models/lab2_serializers.dart';
+import 'package:dtm_front/services/request_service.dart';
+import 'package:dtm_front/lab2/lab2_serializers.dart';
 import 'package:get/get.dart';
 
 class Lab2Controller extends GetxController {
@@ -32,7 +32,7 @@ class Lab2Controller extends GetxController {
         List.generate(y, (index) => '${index + 1}'),
         List.generate(x, (index) => '$index'),
         matrix.take(x).map((e) => e.take(y).toList()).toList());
-    final connectInstance = AppFrontConnect();
+    final connectInstance = RequestService();
     final response = await connectInstance.postLab2(data.toJson());
     answer = AnswerData.fromJson(response.body);
     update();

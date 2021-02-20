@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 
-import 'app_front_connector.dart';
+import '../services/request_service.dart';
 
-class AppFrontController extends GetxController {
+class Lab1Controller extends GetxController {
   LabState labState;
 
   String get header => labState.header;
@@ -83,7 +83,7 @@ class LabState {
     status = AnswerStatus.loading;
     // update();
 
-    final connect = AppFrontConnect();
+    final connect = RequestService();
     final request = {
       'alternatives': List.generate(xLength,
           (alternativeIndex) => xAxisNames[alternativeIndex + 1] ?? ''),

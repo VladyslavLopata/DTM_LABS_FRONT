@@ -1,10 +1,10 @@
-import 'package:dtm_front/app_front/app_front_controller.dart';
+import 'package:dtm_front/lab1/lab1_controller.dart';
 import 'package:dtm_front/widgets/lab_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class AppFront extends StatelessWidget {
+class Lab1View extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,8 +15,8 @@ class AppFront extends StatelessWidget {
         lab: 1,
       ),
       body: Center(
-        child: GetBuilder<AppFrontController>(
-          init: AppFrontController(),
+        child: GetBuilder<Lab1Controller>(
+          init: Lab1Controller(),
           builder: (controller) => Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

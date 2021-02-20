@@ -1,9 +1,9 @@
-import 'package:dtm_front/app_front/app_front_controller.dart';
+import 'package:dtm_front/lab1/lab1_controller.dart';
 import 'package:get/get.dart';
 
 class AppFrontBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => AppFrontController());
+    Get.lazyPut(() => Lab1Controller());
   }
 }

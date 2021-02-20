@@ -1,4 +1,4 @@
-import 'package:dtm_front/lab2/controllers/lab2_controller.dart';
+import 'package:dtm_front/lab2/lab2_controller.dart';
 import 'package:dtm_front/widgets/lab_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

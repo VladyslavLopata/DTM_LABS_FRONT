@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 
-class AppFrontConnect extends GetConnect {
+class RequestService extends GetConnect {
   final url = 'http://127.0.0.1:5000/api/';
   final headers = {
     'Content-type': 'application/json',
